@@ -2,11 +2,16 @@
 
 class CarrinhoDeCompras:
 
+    #---------------------------------------
     #Propriedade de  calculo do valor automático
+    #---------------------------------------
     @property
     def total(self):
         return sum(produto.preco for produto in self.__itens)\
-            
+
+    #---------------------------------------
+    # Manipulaação da lista
+    #---------------------------------------            
     def __init__(self, cliente):
         self.cliente =  cliente
         self.__itens = []
@@ -15,6 +20,9 @@ class CarrinhoDeCompras:
         if produto in  self.__itens:
             self.__itens.remove(produto)
 
+    #---------------------------------------
+    #Exibição para o usuário
+    #---------------------------------------
     def listar_itens(self):
         for produto in self.__itens:
             print(produto)  #aciona Produto.__str__ de forma automatica
