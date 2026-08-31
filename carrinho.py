@@ -16,8 +16,11 @@ class CarrinhoDeCompras:
         self.cliente =  cliente
         self.__itens = []
 
-    def remove_produto(self, produto):
-        if produto in  self.__itens:
+    def adicionar_produto(self, produto):
+        self.__itens.append(produto)
+
+    def remover_produto(self, produto):
+        if produto in self.__itens:
             self.__itens.remove(produto)
 
     #---------------------------------------
@@ -28,9 +31,10 @@ class CarrinhoDeCompras:
             print(produto)  #aciona Produto.__str__ de forma automatica
 
     def __str__(self):
-        return (f"Carrinho de {self.cliente.nome} |"
-                f"{len(self.__itens)} item(ns) |"
+        return (f"Carrinho de {self.cliente.nome} | "
+                f"{len(self.__itens)} item(ns) | "
                 f"Total: R$ {self.total:.2f}")
+
 
     #Utilizado para fazer depuração
     def __repr__(self):

@@ -2,18 +2,16 @@ class Produto:
     def __init__(self, nome: str, categoria: str, preco: float):
         self.nome = nome
         self._categoria = categoria
-        self.__preco = preco
+        self.preco = preco
 
     def __str__(self):
         formato = f'{self.nome} ({self._categoria}) - R$ {self.__preco:.2f}'
         return formato
 
     def __repr__(self):
-        formato = f'Produto(\n' + \
-                f'  nome: {self.nome}, \n' + \
-                f'  categoria: {self._categoria}, \n' + \
-                f'  preco: {self.__preco:.2f}\n)'
-        return formato
+        return (f"Produto(nome='{self.nome}', "
+                f"categoria='{self._categoria}', "
+                f"preco={self.__preco})")
 
     @property
     def preco(self) -> float:
