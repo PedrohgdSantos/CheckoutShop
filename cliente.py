@@ -152,13 +152,17 @@ class Cliente:
         self.__cpf = valor
 
     ''' ENCAPSULAMENTO TRADICIONAL '''
+    # protege atributos privados fornecendo métodos explícitos de leitura e modificação
 
+    # leitor: permite consultar o valor guardado no atributo privado __saldo_cupom sem dar acesso direto à variável na memória
     def get_saldo_cupom(self) -> float:
         """Getter tradicional para retorno do saldo privado de cupons."""
         return self.__saldo_cupom
 
+    # modificador com regra de negócio (saldo acumulativo positivo): em vez de sobrescrever o saldo diretamente, 
+    # exige uma ação incremental (+=) e impede depósitos de valores nulos ou negativos via ValueError
     def adicionar_cupom(self, valor: float):
-        """Método para adicionar saldo de cupom, garantindo que o valor seja maior que zero."""
+        # método para adicionar saldo de cupom, garantindo que o valor seja maior que zero.
         if valor <= 0:
             raise ValueError(
                 "O valor do cupom deve ser estritamente maior que zero."
@@ -166,13 +170,26 @@ class Cliente:
         self.__saldo_cupom += valor
 
     '''MÉTODOS DUNDER'''
+    # definem o comportamento interno do objeto perante comandos nativos do Python
+    # integra a classe ao funcionamento nativo da linguagem (ex: converter para texto, somar, comparar objetos)
 
+    # público-alvo: usuários do sistema
+    # exibe a string limpa
     def __str__(self) -> str:
-        """Retorna resumo amigável formatando o CPF sem pontuação conforme especificação."""
-        # Remove os pontos e o hífen para corresponder ao retorno esperado: "12345678901"[cite: 1]
+        """retorna resumo amigável formatando o CPF sem pontuação conforme especificação"""
+        # Remove os pontos e o hífen para corresponder ao retorno esperado: "12345678901"
+        # for c in self.__cpf: O loop percorre a string do CPF caractere por caractere
+        # if c.isdigit(): o método avalia cada caractere, se for um dígito de '0' a '9', ele retorna True; se for pontuação (. ou -), 
+        # retorna False e o caractere é descartado
+        # c for c in ... if ...: é uma expressão geradora (generator expression),
+        # que entrega os caracteres numéricos filtrados um a um conforme são processados
+        # "".join(...): o método .join() pega a sequência de números e os une em uma única string, 
+        # utilizando o texto entre aspas "" (string vazia) como separador entre eles
         cpf_limpo = "".join(c for c in self.__cpf if c.isdigit())
         return f"Cliente: {self.nome} | CPF: {cpf_limpo}"
 
+    # público-alvo: desenvolvedores
+    # exibe a estrutura exata do construtor 
     def __repr__(self) -> str:
-        """Retorna representação técnica do objeto para depuração."""
-        return f"Cliente(nome='{self.nome}', email='{self._email}', cpf='{self.__cpf}')"  #[cite: 1]
+        # retorna representação técnica do objeto para depuração
+        return f"Cliente(nome='{self.nome}', email='{self._email}', cpf='{self.__cpf}')"
