@@ -131,7 +131,7 @@ class Cliente:
         if digitos[9] != dv1_esperado:
             raise ValueError(
                 "CPF inválido: primeiro dígito verificador incorreto."
-            )  #[cite: 1]
+            )
 
         # cálculo do segundo dígito verificador (DV1), o 11º número da string do CPF (digitos), (digitos[9])
         # inclusão do DV1: Repete a lógica de soma, porém agora incluindo 10 dígitos (os 9 base + o primeiro dígito verificador)
@@ -163,6 +163,10 @@ class Cliente:
     # exige uma ação incremental (+=) e impede depósitos de valores nulos ou negativos via ValueError
     def adicionar_cupom(self, valor: float):
         # método para adicionar saldo de cupom, garantindo que o valor seja maior que zero.
+        # bool é subclasse de int, por isso True/False são recusados antes da comparação
+        if isinstance(valor, bool) or not isinstance(valor, (int, float)):
+            raise ValueError("Valor de cupom inválido: informe um número (int ou float).")
+
         if valor <= 0:
             raise ValueError(
                 "O valor do cupom deve ser estritamente maior que zero."
