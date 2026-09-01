@@ -19,6 +19,7 @@ Este módulo representa o comprador do sistema e implementa:
 import re
 
 class Cliente:
+    # classe que representa o comprador e guarda seus dados cadastrais
 
     # modelagem do comprador e validação dos seus dados cadastrais
     # atributos estão sem restrição de visibilidade pois serão definidas nos métodos
@@ -29,19 +30,28 @@ class Cliente:
     # na prática de sistemas, saldos não devem ser substituídos diretamente, mas sim incrementados via transação,
     # fato que acontecerá por meio do método adicionar_cupom(valor) que força a regra somar (+=) ao saldo anterior e impede depósitos inválidos
     # também foi requisito do roteiro realizar dessa forma
+    # MÉTODO INICIALIZADOR: roda ao escrever Cliente(...)
     def __init__(self, nome: str, email: str, cpf: str):
+        # PÚBLICO: acesso livre, não precisa de validação
         self.nome = nome
+
+        # as duas linhas abaixo não gravam direto: passam pelos setters,
+        # que validam o dado antes de aceitá-lo
         self.email = email
         self.cpf = cpf
+
+        # PRIVADO: todo cliente começa sem cupom acumulado
         self.__saldo_cupom = 0.0
 
     '''DECORADORES EMAIL'''
 
+    # GETTER: permite ler cliente.email como se fosse um atributo comum
     @property
     def email(self):
         # getter para o atributo email
         return self._email
 
+    # SETTER: roda em cliente.email = "algo" e barra endereços malformados
     @email.setter
     def email(self, valor: str):
     # setter que exige texto antes e depois de @
@@ -66,11 +76,14 @@ class Cliente:
 
     '''DECORADORES CPF'''
 
+    # GETTER: única forma correta de ler o CPF de fora da classe
     @property
     def cpf(self) -> str:
         # Getter para o atributo privado __cpf.
         return self.__cpf
 
+    # SETTER: aplica as 4 etapas oficiais de validação antes de aceitar o CPF
+    # (máscara -> dígitos repetidos -> 1º dígito verificador -> 2º dígito verificador)
     @cpf.setter
     def cpf(self, valor: str):
         # setter para o algoritmo de validação do CPF
