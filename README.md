@@ -6,6 +6,9 @@ Trabalho 1 de Programação Orientada a Objetos — Prof. Lucio Nunes de Lira �
 
 **Integrantes:** Gabriel Oliveira Sampaio · João Pedro Xavier Lopes · Pedro Henrique Santos
 
+> 📄 **[DOCUMENTACAO.md](DOCUMENTACAO.md)** — documentação técnica detalhada: cada arquivo `.py`
+> explicado membro por membro, o algoritmo do CPF resolvido na mão, mapa de exceções e glossário.
+
 ---
 
 ## Como executar
