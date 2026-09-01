@@ -7,6 +7,7 @@ print("=== Passo 1: instanciacao e __str__/__repr__ ===")
 p1 = Produto("Camiseta", "Vestuario", 49.90)
 p2 = Produto("Tenis", "Calcados", 199.90)
 p3 = Produto("Bone", "Acessorios", 125.00)
+# CPF VALIDO: 111.444.777-35.    
 cliente1 = Cliente("Maria Silva", "maria@email.com", "123.456.789-01")
 
 for obj in (p1, p2, p3, cliente1):
